@@ -56,6 +56,7 @@ type MergeRequestEventPayload struct {
 	Changes          Changes          `json:"changes"`
 	Project          Project          `json:"project"`
 	Repository       Repository       `json:"repository"`
+	Labels           []Label          `json:"labels"`
 }
 
 // PushEventPayload contains the information for GitLab's push event
@@ -491,12 +492,19 @@ type Author struct {
 // Changes contains all changes associated with a GitLab issue or MR
 type Changes struct {
 	LabelChanges LabelChanges `json:"labels"`
+	IDChanges    IDChanges    `json:"id"`
 }
 
 // LabelChanges contains changes in labels assocatiated with a GitLab issue or MR
 type LabelChanges struct {
 	Previous []Label `json:"previous"`
 	Current  []Label `json:"current"`
+}
+
+// IDChanges contains changes to the MR id
+type IDChanges struct {
+	Previous int64 `json:"previous"`
+	Current  int64 `json:"current"`
 }
 
 // Label contains all of the GitLab label information
